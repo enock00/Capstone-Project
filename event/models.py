@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+from django.core.exceptions import ValidationError
+
 
 class Event(models.Model):
     title = models.CharField(max_length=30)
@@ -9,6 +12,11 @@ class Event(models.Model):
     organizer =  models.ForeignKey(User, on_delete=models.CASCADE, related_name='events')
     capacity = models.PositiveIntegerField()
     created_date = models.DateTimeField(auto_now_add=True)
+
+    def clean(self):
+        if self.date_time < timezone.now():
+
+            raise ValidationError("Event can not be in the past")
 
     def __str__(self):
         return self.title
