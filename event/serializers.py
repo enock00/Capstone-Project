@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Event
+from .models import Event, Comment
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -8,7 +8,7 @@ class EventSerializer(serializers.ModelSerializer):
      organizer =  serializers.ReadOnlyField(source="organizer.username")
 
      class Meta:
-          Model = Event
+          model = Event
 
           fields = [
                'title',
@@ -17,8 +17,8 @@ class EventSerializer(serializers.ModelSerializer):
                'date_time',
                'organizer',
                'capacity',
-               'location'
-               'created_at'
+               'location',
+               'created_date'
                
                ]
           read_only_fields = ["organizer", "created_at"]
@@ -32,7 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
      password = serializers.CharField(write_only=True)
 
      class Meta:
-          Model = User
+          model = User
 
           fields = [
                'id',
@@ -48,3 +48,19 @@ class UserSerializer(serializers.ModelSerializer):
           user.set_password(validated_data["password"])
           user.save()
           return User
+
+class CommentSerializer(serializers.ModelSerializer):
+     user_name = serializers.ReadOnlyField(source="user.username")
+
+     class Meta:
+          model = Comment
+
+          fields = [
+               'event',
+               'user',
+               'text',
+               'created_at'
+          ]
+
+          read_only_fields = ('user', 'created_at')
+          
