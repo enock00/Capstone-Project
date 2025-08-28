@@ -8,7 +8,7 @@ class Event(models.Model):
     title = models.CharField(max_length=30)
     description = models.TextField(blank=True)
     location = models.CharField(max_length=200)
-    date_time = models.DateTimeField()
+    date_time = models.DateField()
     organizer =  models.ForeignKey(User, on_delete=models.CASCADE, related_name='events')
     capacity = models.PositiveIntegerField()
     created_date = models.DateTimeField(auto_now_add=True)

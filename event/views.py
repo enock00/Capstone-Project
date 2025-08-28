@@ -86,6 +86,6 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         event_pk = self.kwargs.get('event_pk')
         if event_pk:
-            serializer.save(author=self.request.user, event_id=event_pk)
+            serializer.save(user=self.request.user, event_id=event_pk)
         else:
-            serializer.save(author=self.request.user)
+            serializer.save(user=self.request.user)

@@ -81,7 +81,7 @@ class UserSerializer(serializers.ModelSerializer):
           return User
 
 class CommentSerializer(serializers.ModelSerializer):
-     user_name = serializers.ReadOnlyField(source="user.username")
+     user  = serializers.ReadOnlyField(source="user.username")
 
      class Meta:
           model = Comment
@@ -90,8 +90,8 @@ class CommentSerializer(serializers.ModelSerializer):
                'event',
                'user',
                'text',
-               'created_at'
+               'created_date'
           ]
 
-          read_only_fields = ('user', 'created_at')
+          read_only_fields = ('user', 'created_date')
           
