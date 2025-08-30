@@ -8,6 +8,44 @@ of events.
 - Users can also register new events and add comments on upcoming events.
 - Permissions, there is different permissions for participants and organisers.
 
+# Registering a new user 
+POST http://127.0.0.1:8000/api/register/
+
+{
+    "username": "Kipkorir",
+    "email": "kipkorir@example.com",
+    "password": "StrongPassword123",
+    "confirm_password": "StrongPassword123"
+}
+
+
+# login 
+POST http://127.0.0.1:8000/api/login/
+
+{
+    "username": "newuser",
+    "password": "StrongPassword123"
+}
+
+# registering a new event
+POST http://127.0.0.1:8000/api/events/
+
+{
+    "title": "Alx Graduation",
+    "location": "Nairobi",
+    "date_time": "2025-9-45",
+    "capacity": "4000"
+}
+
+# Adding comments
+POST http://127.0.0.1:8000/api/comments/
+
+{
+    "event": "Alx Graduation",
+    "text": "Congratulations to you all",
+}
+
+
 # API Endpoints.
 POST	/api/register/ - Register a new user.
 POST	/api/login/ - User login & get token.
